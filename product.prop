@@ -39,6 +39,13 @@ ro.lmk.kill_heaviest_task=true
 ro.lmk.kill_timeout_ms=15
 ro.lmk.use_minfree_levels=true
 
+# Dex2oat
+dalvik.vm.dex2oat64.enabled=true
+dalvik.vm.image-dex2oat-filter=speed
+dalvik.vm.image-dex2oat-threads=8
+dalvik.vm.dex2oat-filter=speed
+dalvik.vm.dex2oat-threads=8
+
 # Display
 debug.sf.disable_backpressure=1
 
