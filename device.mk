@@ -449,6 +449,10 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/xiaomi
 
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Settings \
+    SystemUI
+
 # Telephony
 PRODUCT_PACKAGES += \
     CarrierConfigOverlay \
