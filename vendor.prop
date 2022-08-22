@@ -244,6 +244,7 @@ ro.vendor.audio.soundtrigger=sva
 sys.thermal.data.path=/data/vendor/thermal/
 
 # USB
+vendor.usb.product_string=Redmi Note 11
 vendor.usb.diag.func.name=diag
 vendor.usb.use_ffs_mtp=0
 
