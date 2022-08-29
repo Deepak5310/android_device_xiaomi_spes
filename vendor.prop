@@ -250,7 +250,12 @@ sys.thermal.data.path=/data/vendor/thermal/
 vendor.usb.diag.func.name=diag
 vendor.usb.use_ffs_mtp=0
 
-# Wi-Fi
+# Suspend properties
+suspend.short_suspend_threshold_millis=2000
+suspend.short_suspend_backoff_enabled=true
+suspend.max_sleep_time_millis=40000
+
+# WiFi
 wifi.aware.interface=wifi-aware0
 
 # WLAN
