@@ -414,6 +414,9 @@
     <!-- Whether the always on display mode is available. -->
     <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
 
+    <!-- Whether doze feature is enabled by default in settings -->
+    <bool name="config_doze_enabled_by_default">true</bool>
+
     <!-- Control whether the always on display mode is enabled by default. This value will be used
          during initialization when the setting is still null. -->
     <bool name="config_dozeAlwaysOnEnabled">false</bool>
