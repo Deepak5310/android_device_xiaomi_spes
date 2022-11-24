@@ -11,8 +11,20 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from spes/spesn device
 $(call inherit-product, device/xiaomi/spes/device.mk)
 
-# Inherit some common LineageOS stuff.
+# Inherit some common riceDroid stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+SUSHI_BOOTANIMATION  := 1080
+RICE_OFFICIAL := true
+RICE_CHIPSET := SMD680
+RICE_MAINTAINER := @Deepak5310
+TARGET_BUILD_GRAPHENEOS_CAMERA := false
+TARGET_ENABLE_BLUR := false
+TARGET_HAS_UDFPS := false
+TARGET_KERNEL_OPTIONAL_LD := false
+TARGET_USE_PIXEL_FINGERPRINT := false
+WITH_GMS := true
+TARGET_CORE_GMS := true
+TARGET_CORE_GMS_EXTRAS := true
 
 # Product Specifics
 PRODUCT_NAME := lineage_spes
