@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.refreshrate;
+package org.lineageos.settings.thermal;
 
 import android.app.ActivityManager;
 import android.app.ActivityTaskManager;
@@ -22,21 +22,22 @@ import android.app.ActivityTaskManager.RootTaskInfo;
 import android.app.IActivityTaskManager;
 import android.app.TaskStackListener;
 import android.app.Service;
+import android.app.TaskStackListener;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 import android.os.RemoteException;
+import android.util.Log;
 
-public class RefreshService extends Service {
+public class ThermalService extends Service {
 
-    private static final String TAG = "RefreshService";
-    private static final boolean DEBUG = true;
+    private static final String TAG = "ThermalService";
+    private static final boolean DEBUG = false;
 
     private String mPreviousApp;
-    private RefreshUtils mRefreshUtils;
+    private ThermalUtils mThermalUtils;
+
     private IActivityTaskManager mActivityTaskManager;
 
     @Override
@@ -48,7 +49,7 @@ public class RefreshService extends Service {
         } catch (RemoteException e) {
             // Do nothing
         }
-        mRefreshUtils = new RefreshUtils(this);
+        mThermalUtils = new ThermalUtils(this);
         super.onCreate();
     }
 
@@ -63,7 +64,7 @@ public class RefreshService extends Service {
         return null;
     }
 
-     private final TaskStackListener mTaskListener = new TaskStackListener() {
+    private final TaskStackListener mTaskListener = new TaskStackListener() {
         @Override
         public void onTaskStackChanged() {
             try {
@@ -71,16 +72,14 @@ public class RefreshService extends Service {
                 if (info == null || info.topActivity == null) {
                     return;
                 }
+
                 String foregroundApp = info.topActivity.getPackageName();
                 if (DEBUG) Log.d(TAG, "onTaskStackChanged: foregroundApp=" + foregroundApp);
-                if (!mRefreshUtils.isAppInList) {
-                 mRefreshUtils.getOldRate();
-                  } 
                 if (!foregroundApp.equals(mPreviousApp)) {
-                    mRefreshUtils.setRefreshRate(foregroundApp);
+                    mThermalUtils.setThermalProfile(foregroundApp);
                     mPreviousApp = foregroundApp;
-                  }
- 		 } catch (Exception e) {}
-            }
-        };
-    }
+                }
+            } catch (Exception e) {}
+        }
+    };
+}
