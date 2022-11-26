@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 WaveOS
+ * Copyright (C) 2021 crDroid Android Project
  * Copyright (C) 2021 Chaldeaprjkt
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.refreshrate;
+package org.lineageos.settings;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -23,21 +23,18 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.view.Display;
 
-import org.lineageos.settings.R;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class RefreshTileService extends TileService {
+public class RefreshRateTileService extends TileService {
     private static final String KEY_MIN_REFRESH_RATE = "min_refresh_rate";
     private static final String KEY_PEAK_REFRESH_RATE = "peak_refresh_rate";
 
     private Context context;
     private Tile tile;
 
-    private final List<Integer> availableRates = new ArrayList<>();
+    private final List<Float> availableRates = new ArrayList<>();
     private int activeRateMin;
     private int activeRateMax;
 
@@ -47,12 +44,10 @@ public class RefreshTileService extends TileService {
         context = getApplicationContext();
         Display.Mode mode = context.getDisplay().getMode();
         Display.Mode[] modes = context.getDisplay().getSupportedModes();
-        int[] blocklist = context.getResources().getIntArray(R.array.refresh_rate_tile_blocklist);
         for (Display.Mode m : modes) {
-            int rate = (int) Math.round(m.getRefreshRate());
-            boolean isBlocked = blocklist != null && Arrays.stream(blocklist).anyMatch(x -> x == rate);
+            float rate = Float.valueOf(String.format(Locale.US, "%.02f", m.getRefreshRate()));
             if (m.getPhysicalWidth() == mode.getPhysicalWidth() &&
-                    m.getPhysicalHeight() == mode.getPhysicalHeight() && !isBlocked) {
+                m.getPhysicalHeight() == mode.getPhysicalHeight()) {
                 availableRates.add(rate);
             }
         }
@@ -60,9 +55,9 @@ public class RefreshTileService extends TileService {
     }
 
     private int getSettingOf(String key) {
-        float rate = Settings.System.getFloat(context.getContentResolver(), key, 90);
-        int active = availableRates.indexOf((int) Math.round(rate));
-        return Math.max(active, 0);
+        float rate = Settings.System.getFloat(context.getContentResolver(), key, 120);
+        return availableRates.indexOf(
+                Float.valueOf(String.format(Locale.US, "%.02f", rate)));
     }
 
     private void syncFromSettings() {
@@ -71,27 +66,33 @@ public class RefreshTileService extends TileService {
     }
 
     private void cycleRefreshRate() {
-        if (activeRateMax == 0) {
-    	    if(activeRateMin == 0) {
-                activeRateMin = availableRates.size();
-    	    }
-	        activeRateMax = activeRateMin;
-	        float rate = availableRates.get(activeRateMin - 1);
-      	    Settings.System.putFloat(context.getContentResolver(), KEY_MIN_REFRESH_RATE, rate);
+        if(activeRateMax == 0){
+    	    if(activeRateMin == 0){
+                activeRateMin= availableRates.size();
+	    }
+	    activeRateMax = activeRateMin;
+	    float rate = availableRates.get(activeRateMin - 1);
+  	    Settings.System.putFloat(context.getContentResolver(), KEY_MIN_REFRESH_RATE, rate);
         }
         float rate = availableRates.get(activeRateMax - 1);
         Settings.System.putFloat(context.getContentResolver(), KEY_PEAK_REFRESH_RATE, rate);
     }
 
+    private String getFormatRate(float rate) {
+        return String.format("%.02f Hz", rate)
+                            .replaceAll("[\\.,]00", "");
+    }
+
     private void updateTileView() {
         String displayText;
-        int min = availableRates.get(activeRateMin);
-        int max = availableRates.get(activeRateMax);
+        float min = availableRates.get(activeRateMin);
+        float max = availableRates.get(activeRateMax);
 
-        displayText = String.format(Locale.US, min == max ? "%d Hz" : "%d - %d Hz", min, max);
+        displayText = String.format(Locale.US, min == max ? "%s" : "%s - %s",
+            getFormatRate(min), getFormatRate(max));
         tile.setContentDescription(displayText);
         tile.setSubtitle(displayText);
-        tile.setState(min != max ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+        tile.setState(min == max ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
         tile.updateTile();
     }
 
