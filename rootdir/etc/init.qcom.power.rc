@@ -154,3 +154,6 @@ on init
     # report max frequency to unity tasks.
     write /proc/sys/kernel/sched_lib_name "UnityMain,libunity.so"
     write /proc/sys/kernel/sched_lib_mask_force 255
+
+    # Enable suspend to RAM
+    write /sys/power/mem_sleep "deep"
