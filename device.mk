@@ -452,6 +452,11 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
     Settings \
     SystemUI
 
+# SSR
+PRODUCT_SYSTEM_PROPERTIES += \
+    persist.vendor.ssr.restart_level=ALL_ENABLE \
+    persist.vendor.ssr.enable_ramdumps=1
+
 # Telephony
 PRODUCT_PACKAGES += \
     CarrierConfigOverlay \
