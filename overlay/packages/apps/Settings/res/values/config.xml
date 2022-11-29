@@ -22,4 +22,7 @@
 
     <!-- Whether to show a preference item for mobile plan -->
     <bool name="config_show_mobile_plan">false</bool>
+
+    <!-- The number of vibration intensity levels supported by the device -->
+    <integer name="config_vibration_supported_intensity_levels">3</integer>
 </resources>
