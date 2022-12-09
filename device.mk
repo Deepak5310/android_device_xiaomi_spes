@@ -139,6 +139,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
     vendor.qti.hardware.btconfigstore@2.0.vendor
 
+# Bootanimation
+TARGET_SCREEN_WIDTH := 1080
+TARGET_SCREEN_HEIGHT := 2400
+
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl-qti \
@@ -161,6 +165,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.camera.device@1.0.vendor \
     vendor.qti.hardware.camera.postproc@1.0.vendor
+
+# Component overrides
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml \
+    $(LOCAL_PATH)/configs/component-overrides_qti.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/component-overrides.xml
 
 # Consumer IR
 PRODUCT_PACKAGES += \
@@ -454,11 +463,6 @@ WITH_DEXPREOPT_DEBUG_INFO := false
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     Settings \
     SystemUI
-
-# SSR
-PRODUCT_SYSTEM_PROPERTIES += \
-    persist.vendor.ssr.restart_level=ALL_ENABLE \
-    persist.vendor.ssr.enable_ramdumps=1
 
 # Telephony
 PRODUCT_PACKAGES += \
