@@ -17,8 +17,8 @@ cc_library_static {
 }
 
 cc_library_static {
-    name: "init_xiaomi_spes",
-    srcs: ["init_xiaomi_spes.cpp"],
+    name: "init_spes",
+    srcs: ["init_spes.cpp"],
     whole_static_libs: ["libinit_xiaomi"],
     include_dirs: [
         "system/libbase/include",

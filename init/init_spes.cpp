@@ -9,7 +9,7 @@
 
 #include "vendor_init.h"
 
-static const variant_info_t spes_info = {
+static const variant_info_t spes_global_info = {
     .hwc_value = "Global",
     .sku_value = "",
     .brand = "Redmi",
@@ -33,17 +33,6 @@ static const variant_info_t spes_in_info = {
 
 static const variant_info_t spesn_info = {
     .hwc_value = "",
-    .sku_value = "k7tl",
-    .brand = "Redmi",
-    .device = "spes",
-    .marketname = "Redmi Note 11",
-    .model = "2201117TL",
-    .build_fingerprint = "Redmi/spes_global/spes:12/SKQ1.211103.001/V13.0.6.0.SGCMIXM:user/release-keys",
-    .nfc = false,
-};
-
-static const variant_info_t spesn_info = {
-    .hwc_value = "",
     .sku_value = "k7tn",
     .brand = "Redmi",
     .device = "spesn",
@@ -54,7 +43,7 @@ static const variant_info_t spesn_info = {
 };
 
 static const std::vector<variant_info_t> variants = {
-    spes_info,
+    spes_global_info,
     spes_in_info,
     spesn_info,
 };
