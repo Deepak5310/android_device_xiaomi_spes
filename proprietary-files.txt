@@ -1361,10 +1361,10 @@ vendor/etc/init/vendor.qti.hardware.soter@1.0-service.rc
 vendor/lib64/hw/vendor.qti.hardware.soter@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.soter@1.0.so
 
-# Thermal engine - from alioth_global-user 12 RKQ1.200826.002 V13.0.2.0.SKHMIXM release-keys
+# Thermal engine - from miui_ALIOTHGlobal_V13.0.6.0.SKHMIXM_e83b44e411_12.0.zip
 -vendor/lib/libthermalclient.so|6ed686c6c39546a7bf532767f6d87808a42b1176
 -vendor/lib64/libthermalclient.so|7bcb4af9a6ae8d12bb0b2749c85e2ff1473678aa
-vendor/bin/mi_thermald|909c57ed861248423a62fc2d0385e99d955e9b0f
+vendor/bin/mi_thermald|63b3a4dd3b1ae02d7f907bae87c358dbefe8866f
 vendor/etc/init/init.mi_thermald.rc|6505d89e19957888612d89f6769585a7d26af080
 
 # Thermal configs (Global)
@@ -1380,7 +1380,7 @@ vendor/etc/thermal-phone.conf
 vendor/etc/thermal-tgame.conf
 vendor/etc/thermald-devices.conf
 
-# Thermal configs (India) - from alioth_global-user 12 RKQ1.200826.002 V13.0.2.0.SKHMIXM release-keys
+# Thermal configs (India) - from miui_ALIOTHGlobal_V13.0.6.0.SKHMIXM_e83b44e411_12.0.zip
 vendor/etc/thermal-india-class0.conf|7cc57c1e625297c600c840a08e6e7d2d0af81817
 vendor/etc/thermal-india-mgame.conf|fda5b9fef4e24146ba430241eb100919f660c376
 vendor/etc/thermal-india-normal.conf|3ace701339810d147a2abf8cb8e77c1651c107c8
