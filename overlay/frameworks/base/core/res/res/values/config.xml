@@ -513,6 +513,18 @@
     <!-- Flag indicating if the speed up audio on mt call code should be executed -->
     <bool name="config_speed_up_audio_on_mt_calls">true</bool>
 
+    <!-- Idle current for bluetooth controller. 0 by default-->
+    <integer translatable="false" name="config_bluetooth_idle_cur_ma">7</integer>
+
+    <!-- Rx current for bluetooth controller. 0 by default-->
+    <integer translatable="false" name="config_bluetooth_rx_cur_ma">75</integer>
+
+    <!-- Tx current for bluetooth controller. 0 by default-->
+    <integer translatable="false" name="config_bluetooth_tx_cur_ma">93</integer>
+
+    <!-- Operating volatage for bluetooth controller. 0 by default-->
+    <integer translatable="false" name="config_bluetooth_operating_voltage_mv">3700</integer>
+
     <!-- Vibrator pattern for feedback about a long screen/key press -->
     <integer-array name="config_longPressVibePattern">
         <item>0</item>
@@ -586,7 +598,7 @@
     <integer name="config_defaultPeakRefreshRate">90</integer>
 
     <!-- Indicates whether device has a power button fingerprint sensor. -->
-    <bool name="config_is_powerbutton_fps" translatable="false">true</bool>
+    <bool name="config_is_powerbutton_fps" translatable="false" >true</bool>
 
     <!-- If not zero, limits the internal screen recorder's framerate to the set value. -->
     <integer name="config_screenRecorderMaxFramerate">90</integer>
@@ -615,7 +627,7 @@
                 <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z @dp</string>
          @see https://www.w3.org/TR/SVG/paths.html#PathData
          -->
-    <string name="config_mainBuiltInDisplayCutout" translatable="false">M 0,0 H -37 V 93 H 37 V 0 H 0 Z</string>
+    <string name="config_mainBuiltInDisplayCutout">M 0,0 H -37 V 93 H 37 V 0 H 0 Z</string>
 
     <!-- An array of arrays of side fingerprint sensor properties relative to each display.
          Note: this value is temporary and is expected to be queried directly
@@ -627,9 +639,15 @@
     <array name="config_sfps_sensor_props_0" translatable="false">
         <item></item>
         <item></item>
-        <item>930</item> <!--item>sensorLocationY</item-->
-        <item>150</item> <!--item>sensorRadius</item-->
+        <item>930</item>
+        <item>150</item>
     </array>
+
+    <!-- The list of components which should be automatically disabled for a specific package. -->
+    <string-array name="config_deviceDisabledComponents" translatable="false">
+        <item>com.google.android.gms/com.google.android.gms.nearby.messages.service.NearbyMessagesService</item>
+        <item>com.google.android.gms/com.google.android.gms.nearby.discovery.service.DiscoveryService</item>
+    </string-array>
 
     <!-- Indicate available ColorDisplayManager.COLOR_MODE_xxx. -->
     <integer-array name="config_availableColorModes">
